@@ -1,5 +1,6 @@
 # About The Project
 The 2048 game recreated in libGDX. <br>
+Use WASD keys or the arrow keys to make a move. <br>
 
 
 # Images
