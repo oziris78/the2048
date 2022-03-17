@@ -2,7 +2,7 @@ package com.telek.screens;
 
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -10,8 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.*;
 import com.telek.*;
-import com.telek.jtelek.*;
-import com.telek.jtelek.generalUtils.*;
+import com.telek.telekgdx.screens.TScreen;
+import com.telek.telekgdx.screens.TScreenUtils;
+
 import java.util.*;
 
 
@@ -42,7 +43,6 @@ public class GameScreen implements TScreen {
 
 
     public GameScreen(final The2048 game, int gridSize){
-
         // singleton
         this.game = game;
         this.gridSize = gridSize;
@@ -57,6 +57,7 @@ public class GameScreen implements TScreen {
         camera.update();
 
         // scene2d
+        Skin skin = this.game.assetSorter.getResource("skin", Skin.class);
         stage = new Stage(viewport, this.game.batch);
         Gdx.input.setInputProcessor(stage);
         root = new Table();
@@ -70,7 +71,7 @@ public class GameScreen implements TScreen {
         tableForGrid = new Table();
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                TextButton btn = new TextButton("", this.game.assetSorter.skin);
+                TextButton btn = new TextButton("", skin);
                 btn.setDisabled(true); // for the looks
                 tableForGrid.add(btn).width(90).center();
                 grid[i][j] = btn;
@@ -80,7 +81,7 @@ public class GameScreen implements TScreen {
         root.add(tableForGrid).width(Value.percentWidth(1f, root)).height(Value.percentHeight(0.8f, root)).row();
 
 
-        TextButton btn = new TextButton("GO BACK", this.game.assetSorter.skin);
+        TextButton btn = new TextButton("GO BACK", skin);
         btn.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
            game.setScreen( game.screenSorter.getScreen("mainMenuScreen") );
         }});
@@ -177,8 +178,9 @@ public class GameScreen implements TScreen {
         Gdx.input.setInputProcessor(null);
         this.gameIsOver = true;
         if(game.isMusicOn){
-            long id = this.game.assetSorter.congratsRobot.play();
-            this.game.assetSorter.congratsRobot.setVolume(id, 0.5f);
+            Sound congratsRobot = this.game.assetSorter.getResource("congratsRobot", Sound.class);
+            long id = congratsRobot.play();
+            congratsRobot.setVolume(id, 0.5f);
         }
         Timer.schedule(new Timer.Task() {
             @Override
@@ -192,7 +194,7 @@ public class GameScreen implements TScreen {
     @Override
     public void render(float delta) {
         update(delta);
-        flib.clearScreen(0f, 0f, 0f, 1f);
+        TScreenUtils.clearScreen();
 
         stage.draw();
     }

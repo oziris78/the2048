@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.rafaskoberg.gdx.typinglabel.*;
 import com.telek.*;
-import com.telek.jtelek.*;
-import com.telek.jtelek.generalUtils.*;
+import com.telek.telekgdx.screens.TScreen;
+import com.telek.telekgdx.screens.TScreenUtils;
 
 
 public class MainMenuScreen implements TScreen {
@@ -40,6 +40,7 @@ public class MainMenuScreen implements TScreen {
         camera.update();
 
         // scene2d
+        Skin skin = this.game.assetSorter.getResource("skin", Skin.class);
         stage = new Stage(viewport, this.game.batch);
         Gdx.input.setInputProcessor(stage);
         table = new Table();
@@ -48,18 +49,18 @@ public class MainMenuScreen implements TScreen {
 
         table.top();
 
-        lbTitle = new TypingLabel("{SPEED=0.25}THE 2048 GAME", this.game.assetSorter.skin);
+        lbTitle = new TypingLabel("{SPEED=0.25}THE 2048 GAME", skin);
         table.add(lbTitle).padTop(10f).row();
 
-        btn4x4 = new TextButton("PLAY 4X4", this.game.assetSorter.skin);
+        btn4x4 = new TextButton("PLAY 4X4", skin);
         table.add(btn4x4).padTop(35f).row();
-        btn5x5 = new TextButton("PLAY 5X5", this.game.assetSorter.skin);
+        btn5x5 = new TextButton("PLAY 5X5", skin);
         table.add(btn5x5).padTop(5f).row();
-        btn6x6 = new TextButton("PLAY 6X6", this.game.assetSorter.skin);
+        btn6x6 = new TextButton("PLAY 6X6", skin);
         table.add(btn6x6).padTop(5f).row();
-        btnSettings = new TextButton("SETTINGS", this.game.assetSorter.skin);
+        btnSettings = new TextButton("SETTINGS", skin);
         table.add(btnSettings).padTop(5f).row();
-        btnQuit = new TextButton("QUIT", this.game.assetSorter.skin);
+        btnQuit = new TextButton("QUIT", skin);
         table.add(btnQuit).padTop(5f).row();
         addInputListeners();
     }
@@ -101,7 +102,7 @@ public class MainMenuScreen implements TScreen {
     @Override
     public void render(float delta) {
         update(delta);
-        flib.clearScreen(0f, 0f, 0f, 1f);
+        TScreenUtils.clearScreen();
 
         stage.draw();
     }

@@ -1,19 +1,18 @@
 package com.telek;
 
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.telek.jtelek.generalUtils.AssetSorter;
-import com.telek.jtelek.generalUtils.ScreenSorter;
-import com.telek.screens.GameScreen;
-import com.telek.screens.MainMenuScreen;
-import com.telek.screens.SettingsScreen;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.telek.screens.*;
+import com.telek.telekgdx.assets.*;
+import com.telek.telekgdx.screens.*;
+
+
 
 public class The2048 extends Game {
 
-	// jtelek utils
+	// telek-gdx utils
 	public AssetSorter assetSorter;
 	public ScreenSorter<The2048> screenSorter;
 
@@ -29,6 +28,7 @@ public class The2048 extends Game {
 	public void create() {
 		// assetsorter
 		this.assetSorter = new AssetSorter();
+		initAssetSorter();
 
 		// general control
 		preferences = Gdx.app.getPreferences("telek_the2048");
@@ -47,10 +47,22 @@ public class The2048 extends Game {
 		this.setScreen( this.screenSorter.getScreen("mainMenuScreen") );
 	}
 
+
+	private void initAssetSorter(){
+		// immediately needed assets
+		assetSorter.addImmediatelyNeededAsset("congratsRobot", Gdx.audio.newSound(Gdx.files.internal("congratsRobot.wav")));
+		assetSorter.addImmediatelyNeededAsset("skin", new Skin(Gdx.files.internal("skins/holo-dark-hdpi/Holo-dark-hdpi.json")));
+		// other asset groups
+		// ...
+	}
+
+
 	@Override
 	public void dispose() {
 		super.dispose();
-		this.assetSorter.dispose();
+		this.assetSorter.disposeAll();
 		this.screenSorter.dispose();
 	}
+
+
 }

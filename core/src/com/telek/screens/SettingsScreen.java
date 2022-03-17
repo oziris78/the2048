@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.telek.*;
-import com.telek.jtelek.*;
-import com.telek.jtelek.generalUtils.*;
+import com.telek.telekgdx.screens.TScreen;
+import com.telek.telekgdx.screens.TScreenUtils;
 
 
 public class SettingsScreen implements TScreen {
@@ -38,13 +38,14 @@ public class SettingsScreen implements TScreen {
         camera.update();
 
         // scene2d
+        Skin skin = this.game.assetSorter.getResource("skin", Skin.class);
         stage = new Stage(viewport, this.game.batch);
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
-        btnCloseMusic = new TextButton(game.isMusicOn ? "MUSIC IS ON" : "MUSIC IS OFF", this.game.assetSorter.skin);
+        btnCloseMusic = new TextButton(game.isMusicOn ? "MUSIC IS ON" : "MUSIC IS OFF", skin);
         btnCloseMusic.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
                 game.isMusicOn = !game.isMusicOn;
                 btnCloseMusic.setText(game.isMusicOn ? "MUSIC IS ON" : "MUSIC IS OFF");
@@ -52,7 +53,7 @@ public class SettingsScreen implements TScreen {
                 game.preferences.flush();
         }});
 
-        btnGoBack = new TextButton("GO BACK", this.game.assetSorter.skin);
+        btnGoBack = new TextButton("GO BACK", skin);
         btnGoBack.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
              game.setScreen( game.screenSorter.getScreen("mainMenuScreen") );
         }});
@@ -76,7 +77,7 @@ public class SettingsScreen implements TScreen {
     @Override
     public void render(float delta) {
         update(delta);
-        flib.clearScreen(0f, 0f, 0f, 1f);
+        TScreenUtils.clearScreen();
 
         stage.draw();
     }
