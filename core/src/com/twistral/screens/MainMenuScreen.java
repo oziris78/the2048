@@ -1,4 +1,4 @@
-package com.telek.screens;
+package com.twistral.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.rafaskoberg.gdx.typinglabel.*;
-import com.telek.*;
-import com.telek.telekgdx.screens.TScreen;
-import com.telek.telekgdx.screens.TScreenUtils;
+import com.twistral.toriagdx.screens.TScreen;
+import com.twistral.toriagdx.screens.TScreenUtils;
+import com.twistral.The2048;
 
 
 public class MainMenuScreen implements TScreen {
@@ -78,7 +78,7 @@ public class MainMenuScreen implements TScreen {
             setAndChangeToGameScreen(6);
         }});
         btnSettings.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
-            game.setScreen( game.screenSorter.getScreen("settingsScreen") );
+            game.setScreen( game.screenSorter.getScreen("settingsScreen", game) );
         }});
         btnQuit.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
             Gdx.app.exit();
@@ -87,9 +87,9 @@ public class MainMenuScreen implements TScreen {
 
 
     private void setAndChangeToGameScreen(int gridSize){
-        game.screenSorter.disposeScreen("gameScreen");
-        game.screenSorter.putScreen("gameScreen", new GameScreen(game, gridSize), GameScreen.class);
-        game.setScreen( game.screenSorter.getScreen("gameScreen") );
+        game.screenSorter.nullifyScreen("gameScreen");
+        game.screenSorter.putScreen("gameScreen", GameScreen.class, The2048.class, int.class);
+        game.setScreen( game.screenSorter.getScreen("gameScreen", game, gridSize) );
     }
 
 

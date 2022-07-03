@@ -101,6 +101,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
 
         api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion" // typing label
-        implementation 'com.github.oziris78:telek-gdx:v0.0.8' // telek-gdx
+        implementation 'com.github.oziris78:toria-gdx:v0.1.0' // toria-gdx
     }
 }

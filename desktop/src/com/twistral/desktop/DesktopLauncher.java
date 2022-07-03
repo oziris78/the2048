@@ -1,8 +1,8 @@
-package com.telek.desktop;
+package com.twistral.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.telek.The2048;
+import com.twistral.The2048;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

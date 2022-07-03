@@ -1,4 +1,4 @@
-package com.telek.screens;
+package com.twistral.screens;
 
 
 import com.badlogic.gdx.*;
@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.*;
-import com.telek.*;
-import com.telek.telekgdx.screens.TScreen;
-import com.telek.telekgdx.screens.TScreenUtils;
+import com.twistral.toriagdx.screens.TScreen;
+import com.twistral.toriagdx.screens.TScreenUtils;
+import com.twistral.The2048;
 
 import java.util.*;
 
@@ -83,7 +83,7 @@ public class GameScreen implements TScreen {
 
         TextButton btn = new TextButton("GO BACK", skin);
         btn.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
-           game.setScreen( game.screenSorter.getScreen("mainMenuScreen") );
+           game.setScreen( game.screenSorter.getScreen("mainMenuScreen", this) );
         }});
 
         root.add(btn).padRight(Value.percentWidth(0.6f, root));
@@ -185,7 +185,7 @@ public class GameScreen implements TScreen {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                game.setScreen( game.screenSorter.getScreen("mainMenuScreen") );
+                game.setScreen( game.screenSorter.getScreen("mainMenuScreen", this) );
             }
         }, 3);
     }

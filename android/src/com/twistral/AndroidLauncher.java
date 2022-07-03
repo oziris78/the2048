@@ -1,10 +1,9 @@
-package com.telek;
+package com.twistral;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.telek.The2048;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

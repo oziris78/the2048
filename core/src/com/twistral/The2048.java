@@ -1,20 +1,21 @@
-package com.telek;
+package com.twistral;
 
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.telek.screens.*;
-import com.telek.telekgdx.assets.*;
-import com.telek.telekgdx.screens.*;
-
+import com.twistral.screens.MainMenuScreen;
+import com.twistral.screens.SettingsScreen;
+import com.twistral.toriagdx.assets.*;
+import com.twistral.toriagdx.screens.*;
+import com.twistral.screens.GameScreen;
 
 
 public class The2048 extends Game {
 
-	// telek-gdx utils
+	// toria-gdx utils
 	public AssetSorter assetSorter;
-	public ScreenSorter<The2048> screenSorter;
+	public ScreenSorter screenSorter;
 
 	// saving
 	public Preferences preferences;
@@ -31,20 +32,20 @@ public class The2048 extends Game {
 		initAssetSorter();
 
 		// general control
-		preferences = Gdx.app.getPreferences("telek_the2048");
+		preferences = Gdx.app.getPreferences("twistral_the2048");
 		isMusicOn = preferences.getBoolean("isMusicOn", true);
 
 		// screensorter
-		this.screenSorter = new ScreenSorter<>(this);
-		this.screenSorter.putScreen("mainMenuScreen", MainMenuScreen.class);
-		this.screenSorter.putScreen("settingsScreen", SettingsScreen.class);
-		this.screenSorter.putScreen("gameScreen", GameScreen.class);
+		this.screenSorter = new ScreenSorter();
+		this.screenSorter.putScreen("mainMenuScreen", MainMenuScreen.class, The2048.class);
+		this.screenSorter.putScreen("settingsScreen", SettingsScreen.class, The2048.class);
+		this.screenSorter.putScreen("gameScreen", GameScreen.class, The2048.class, int.class);
 
 		// rendering
 		this.batch = new SpriteBatch();
 
 		// use screensorter
-		this.setScreen( this.screenSorter.getScreen("mainMenuScreen") );
+		this.setScreen( this.screenSorter.getScreen("mainMenuScreen", this) );
 	}
 
 
@@ -61,7 +62,7 @@ public class The2048 extends Game {
 	public void dispose() {
 		super.dispose();
 		this.assetSorter.disposeAll();
-		this.screenSorter.dispose();
+		this.screenSorter.disposeAll();
 	}
 
 

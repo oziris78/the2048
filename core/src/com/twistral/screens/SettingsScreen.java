@@ -1,4 +1,4 @@
-package com.telek.screens;
+package com.twistral.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
-import com.telek.*;
-import com.telek.telekgdx.screens.TScreen;
-import com.telek.telekgdx.screens.TScreenUtils;
+import com.twistral.toriagdx.screens.TScreen;
+import com.twistral.toriagdx.screens.TScreenUtils;
+import com.twistral.The2048;
 
 
 public class SettingsScreen implements TScreen {
@@ -55,7 +55,7 @@ public class SettingsScreen implements TScreen {
 
         btnGoBack = new TextButton("GO BACK", skin);
         btnGoBack.addListener(new ChangeListener() {@Override public void changed(ChangeEvent event, Actor actor) {
-             game.setScreen( game.screenSorter.getScreen("mainMenuScreen") );
+             game.setScreen( game.screenSorter.getScreen("mainMenuScreen", game) );
         }});
 
         table.add(btnCloseMusic).row();

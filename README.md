@@ -1,7 +1,8 @@
+
 # About The Project
 The 2048 game recreated in libGDX. <br>
 Use WASD keys or the arrow keys to make a move. <br>
-This project uses my own libgdx extension: <a href="https://github.com/oziris78/telek-gdx">telek-gdx</a>
+This project uses my own libgdx extension: <a href="https://github.com/oziris78/toria-gdx">toria-gdx</a>
 
 
 # Images
